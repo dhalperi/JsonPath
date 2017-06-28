@@ -29,7 +29,7 @@ public class EvaluatorFactory {
         evaluators.put(RelationalOperator.CONTAINS, new ContainsEvaluator());
         evaluators.put(RelationalOperator.MATCHES, new PredicateMatchEvaluator());
         evaluators.put(RelationalOperator.TYPE, new TypeEvaluator());
-        evaluators.put(RelationalOperator.SUBSETOF, new SubsetOfEvaluator());
+        evaluators.put(RelationalOperator.SUBSET, new SubsetEvaluator());
     }
 
     public static Evaluator createEvaluator(RelationalOperator operator){
@@ -266,7 +266,7 @@ public class EvaluatorFactory {
         }
     }
 
-    private static class SubsetOfEvaluator implements Evaluator {
+    private static class SubsetEvaluator implements Evaluator {
        @Override
        public boolean evaluate(ValueNode left, ValueNode right, Predicate.PredicateContext ctx) {
            ValueNode.ValueListNode rightValueListNode;
@@ -291,7 +291,7 @@ public class EvaluatorFactory {
            } else {
               leftValueListNode = left.asValueListNode();
            }
-           return leftValueListNode.subsetof(rightValueListNode);
+           return leftValueListNode.subset(rightValueListNode);
        }
    }
 

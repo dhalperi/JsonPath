@@ -268,28 +268,28 @@ public class Criteria implements Predicate {
     }
 
     /**
-     * The <code>subsetof</code> operator selects objects for which the specified field is
+     * The <code>subset</code> operator selects objects for which the specified field is
      * an array whose elements comprise a subset of the set comprised by the elements of
      * the specified array.
      *
      * @param o the values to match against
      * @return the criteria
      */
-    public Criteria subsetof(Object... o) {
-        return subsetof(Arrays.asList(o));
+    public Criteria subset(Object... o) {
+        return subset(Arrays.asList(o));
     }
 
     /**
-     * The <code>subsetof</code> operator selects objects for which the specified field is
+     * The <code>subset</code> operator selects objects for which the specified field is
      * an array whose elements comprise a subset of the set comprised by the elements of
      * the specified array.
      *
      * @param c the values to match against
      * @return the criteria
      */
-    public Criteria subsetof(Collection<?> c) {
+    public Criteria subset(Collection<?> c) {
         notNull(c, "collection can not be null");
-        this.criteriaType = RelationalOperator.SUBSETOF;
+        this.criteriaType = RelationalOperator.SUBSET;
         this.right = new ValueNode.ValueListNode(c);
         return this;
     }

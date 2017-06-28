@@ -714,7 +714,7 @@ public abstract class ValueNode {
             return nodes.contains(node);
         }
 
-        public boolean subsetof(ValueListNode right) {
+        public boolean subset(ValueListNode right) {
             for (ValueNode leftNode : nodes) {
                 if (!right.nodes.contains(leftNode)) {
                     return false;
