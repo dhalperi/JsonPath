@@ -45,19 +45,7 @@ install {
 
 uploadArchives {
     deployers << repositories.mavenDeployer {
-        if (snapshotVersion) {
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                if (project.hasProperty("sonatypeOssUsername")) {
-                    authentication(userName: sonatypeOssUsername, password: sonatypeOssPassword)
-                }
-            }
-        } else {
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                if (project.hasProperty("sonatypeOssUsername")) {
-                    authentication(userName: sonatypeOssUsername, password: sonatypeOssPassword)
-                }
-            }
-        }
+        repository(url: "file://localhost/tmp/myRepo/")
     }
 }
 
