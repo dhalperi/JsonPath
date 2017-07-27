@@ -92,7 +92,6 @@ public class JacksonJsonNodeJsonProvider extends AbstractJsonProvider {
         JsonNode e = (JsonNode) o;
 
         if (e.isValueNode()) {
-
             if (e.isTextual()) {
                 return e.asText();
             } else if (e.isBoolean()) {
@@ -112,6 +111,12 @@ public class JacksonJsonNodeJsonProvider extends AbstractJsonProvider {
             } else if (e.isNull()) {
                 return null;
             }
+        } else if (e.isArray()) {
+            List<Object> objects = new ArrayList<Object>();
+            for (JsonNode node : e) {
+                objects.add(unwrap(node));
+            }
+            return objects;
         }
         return o;
     }
