@@ -338,16 +338,16 @@ public abstract class ValueNode {
             if(!isArray(ctx)){
                 return UNDEFINED;
             } else {
-                return new ValueListNode(Collections.unmodifiableList((List) parse(ctx)));
+                Collection nodes = new ArrayList();
+                for (Object value : ctx.configuration().jsonProvider().toIterable(parse(ctx))) {
+                    nodes.add(value);
+                }
+                return new ValueListNode(nodes);
             }
         }
 
         public Object parse(Predicate.PredicateContext ctx){
-            try {
-              return parsed ? json : new JSONParser(JSONParser.MODE_PERMISSIVE).parse(json.toString());
-            } catch (ParseException e) {
-              throw new IllegalArgumentException(e);
-            }
+            return parsed ? json : ctx.configuration().jsonProvider().parse(json.toString());
         }
 
         public boolean isParsed() {
